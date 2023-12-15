@@ -6,7 +6,7 @@ mydb = mysql.connector.connect(
     host="127.0.0.1",
     user="root",
     password="02092002",
-    database="test_chtdttt"
+    database="chtdttt"
 )
 
 
@@ -26,7 +26,7 @@ class ConvertData:
         Lấy dữ liệu bảng bệnh
         """
         dbbenh = mydb.cursor()
-        dbbenh.execute("SELECT * FROM test_chtdttt.benh;")
+        dbbenh.execute("SELECT * FROM chtdttt.benh;")
         benh = dbbenh.fetchall()
         dirbenh = {}
         for i in benh:
@@ -44,7 +44,7 @@ class ConvertData:
         Lấy dữ liệu từ bảng trieuchung
         """
         dbtrieuchung = mydb.cursor()
-        dbtrieuchung.execute("SELECT * FROM test_chtdttt.trieuchung;")
+        dbtrieuchung.execute("SELECT * FROM chtdttt.trieuchung;")
         trieuchung = dbtrieuchung.fetchall()
         dirtrieuchung = {}
         # resulttrieuchung=[]
@@ -98,18 +98,18 @@ class ConvertData:
         dbbc = mydb.cursor()
         dbbc.execute("select idsuydien, luat.idluat, idtrieuchung, idbenh, trangthai from suydien, luat where suydien.idluat=luat.idluat and trangThai='0' order by idbenh")
         fc = dbbc.fetchall()
-        print('conmeno', fc)
+        # print('conmeno', fc)
         rule = []
         s = []
         d = []
-        print('len fc', len(fc))
+        # print('len fc', len(fc))
         for i in range(len(fc)):
-            print('iiiiiiiiiiii',fc)
+            # print('iiiiiiiiiiii',fc)
             rule.append(fc[i][1])
             s.append(fc[i][2])
             d.append(fc[i][3])
         # print(rule)
-        print('xlxx',rule)
+        # print('xlxx',rule)
         vtrule = rule[0]
         tt = []
         benh = None
@@ -117,17 +117,17 @@ class ConvertData:
         dicbc = {}
         for i in range(len(rule)):
             if rule[i] == vtrule:
-                print('rule[i]', rule[i], vtrule)
+                # print('rule[i]', rule[i], vtrule)
                 tt.append(s[i])
                 benh = d[i]
-                print('pornhuub',benh )
-                print('ruleưeeeeeeeeeeeeee',rule )
+                # print('pornhuub',benh )
+                # print('ruleưeeeeeeeeeeeeee',rule )
             else:
                 dicbc['rule'] = vtrule
                 dicbc['benh'] = benh
                 dicbc['trieuchung'] = tt
                 vtrule = rule[i]
-                print('dicbcbenh',dicbc['benh'] )
+                # print('dicbcbenh',dicbc['benh'] )
                 self.resultbc.append(dicbc)
                 benh = d[i]
                 tt = []
@@ -137,13 +137,13 @@ class ConvertData:
         dicbc['benh'] = benh
         dicbc['trieuchung'] = tt
         vtrule = rule[i]
-        print('dicbcbenh',dicbc['benh'] )
+        # print('dicbcbenh',dicbc['benh'] )
         self.resultbc.append(dicbc)
         benh = d[i]
         tt = []
         tt.append(s[i])
         dicbc = {}
-        print('abcđ',self.resultbc)
+        # print('abcđ',self.resultbc)
 
     def groupbc(self):
         """
@@ -158,7 +158,7 @@ class ConvertData:
             for j in i['trieuchung']:
                 t.append(j)
             temp.append(t)
-        print('temp', self.resultbc)
+        # print('temp', self.resultbc)
         return temp
 
     def groupfc(self):
@@ -173,7 +173,7 @@ class ConvertData:
         Nhóm tất cả triệu chứng trong 1 bệnh
         """
         dbtrieuchung=mydb.cursor()
-        dbtrieuchung.execute("SELECT * FROM test_chtdttt.suydien order by idbenh")
+        dbtrieuchung.execute("SELECT * FROM chtdttt.suydien order by idbenh")
         dttt=dbtrieuchung.fetchall()
         benh=[]
         tt=[]
@@ -289,11 +289,6 @@ class Person:
         return f"{self.name} - {self.phoneNumber} - {self.email}"
 
 
-class TreeForFC(object):
-    def __init__(self, value, left=None, right=None):
-        self.value = value
-        self.left = left
-        self.right = right
 
 
 class Symptom:
@@ -302,12 +297,6 @@ class Symptom:
         self.detail = detail
 
 
-def printTree(node, level=0):
-    if node != None:
-        printTree(node.left, level + 1)
-        print(' ' * 10 * level + '-> ' + str(node.value))
-        printTree(node.right, level + 1)
-        
 
 def searchindexrule(rule,goal):
     """
@@ -369,6 +358,11 @@ print(db.resultbenh)
 #     database="test_chtdttt"
 # )
 
+class TreeForFC(object):
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
 # # Tạo một đối tượng cursor để thực hiện các truy vấn SQL
 # mycursor = mydb.cursor()
 
@@ -381,3 +375,9 @@ print(db.resultbenh)
 # # In ra kết quả
 # for row in result:
 #     print(row)
+def printTree(node, level=0):
+    if node != None:
+        printTree(node.left, level + 1)
+        print(' ' * 10 * level + '-> ' + str(node.value))
+        printTree(node.right, level + 1)
+        

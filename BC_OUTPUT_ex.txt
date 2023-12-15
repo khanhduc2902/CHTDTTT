@@ -1,26 +1,43 @@
 PART 1. Dữ liệu
   1) Tập luật
-    R1: S01,S02->D01
-    R2: S02,S03,S16->D01
-    R3: S04,S05->D02
-    R4: S04,S06,S16->D02
-    R5: S07,S08,S16->D03
-    R6: S07,S09->D03
-    R7: S10,S11,S12->D04
-    R8: S13,S14,S15->D05
+    R1: S02,S01->D01
+    R2: S02,S03->D01
+    R3: S01,S03->D01
+    R4: S04,S05->D02
+    R5: S04,S06->D02
+    R6: S16,S04->D02
+    R7: S16,S07->D03
+    R8: S08,S07->D03
+    R9: S09,S07->D03
+    R10: S12->D04
+    R11: S10,S11,S12->D04
+    R12: S10,S12->D04
+    R13: S11->D04
+    R14: S15->D05
+    R15: S13,S14->D05
+    R16: S13,S15->D05
+    R17: S14->D05
+    R18: S17,S18->D06
+    R19: S17,S19->D06
+    R20: S17,S20->D07
+    R21: S17,S21->D07
+    R22: S22,S23->D08
+    R23: S22,S24->D08
+    R24: S22,S25->D09
+    R25: S22,S26->D09
 
   2) Triệu chứng người dùng mắc phải
-    S16, S17, S04, S05.
+    S17, S18.
 
   3) Bệnh nghi ngờ
-    D02.
+    D06.
 
 PART 2. Suy diễn
-  1) Goal D02. Tìm thấy luật R3:S04,S05->D02. Các goals mới cần chứng mình là S04, S05.
-  2) -Goal S04. Cập nhật triệu chứng S04, bởi vì được tìm thấy trong tập triệu chứng gốc S16, S17, S04, S05. Trả về thành công.
-  3) -Goal S05. Cập nhật triệu chứng S05, bởi vì được tìm thấy trong tập triệu chứng gốc S16, S17, S04, S05. Trả về thành công.
-  4) ==>Goal D02. Đã được chứng minh, Trả về thành công
+  1) Goal D06. Tìm thấy luật R18:S17,S18->D06. Các goals mới cần chứng mình là S17, S18.
+  2) -Goal S17. Cập nhật triệu chứng S17, bởi vì được tìm thấy trong tập triệu chứng gốc S17, S18. Trả về thành công.
+  3) -Goal S18. Cập nhật triệu chứng S18, bởi vì được tìm thấy trong tập triệu chứng gốc S17, S18. Trả về thành công.
+  4) ==>Goal D06. Đã được chứng minh, Trả về thành công
 
 PART 3. Kết quả
-  1) Goal D02 được chứng minh.
-  2) Road: R3.
+  1) Goal D06 được chứng minh.
+  2) Road: R18.
